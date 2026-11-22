@@ -35,5 +35,3 @@ In ParaView, click **Apply**, look along the `z` axis, and colour the domain by 
 - `constant/g` sets the gravitational acceleration. `constant/transportProperties` sets each phase's density and viscosity and the surface tension between water and air.
 - `system/blockMeshDict` defines the five-block mesh and its boundary patches. `system/setFieldsDict` defines the initial water column.
 - `system/controlDict` sets the simulation and output times. `system/fvSolution` includes the interface-compression and pressure–velocity coupling settings.
-
-The case follows the classical dam-break geometry and uses the v2606 solver settings. [OpenFOAM v2606 reference case](https://gitlab.com/openfoam/core/openfoam/-/tree/OpenFOAM-v2606/tutorials/multiphase/interFoam/laminar/damBreak/damBreak) · [Wolf Dynamics Tutorial 3 slides](https://www.wolfdynamics.com/images/begtuts/T3_2D_dam_break.pdf)
