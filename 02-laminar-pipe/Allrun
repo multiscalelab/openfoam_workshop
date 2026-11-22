@@ -1,0 +1,9 @@
+#!/bin/sh
+set -eu
+
+cd -- "$(dirname -- "$0")"
+
+blockMesh
+checkMesh
+icoFoam
+postProcess -func sampleDict -latestTime
