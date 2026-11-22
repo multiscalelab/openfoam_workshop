@@ -1,0 +1,46 @@
+bendPressureLoss
+{
+    type            multiFieldValue;
+    libs            (fieldFunctionObjects sampling);
+    operation       subtract;
+    writeControl    timeStep;
+    writeInterval   1;
+    log             false;
+
+    functions
+    {
+        upstream
+        {
+            type               surfaceFieldValue;
+            regionType         sampledSurface;
+            name               upstreamCut;
+            operation          weightedAreaAverage;
+            weightField        U;
+            fields             (pTotal);
+            writeFields        false;
+            log                false;
+
+            sampledSurfaceDict
+            {
+                type        plane;
+                point       (0 0 0.18);
+                normal      (0 0 1);
+                interpolate true;
+            }
+        }
+
+        downstream
+        {
+            $upstream;
+            name               downstreamCut;
+
+            sampledSurfaceDict
+            {
+                type        plane;
+                point       (0.065 0 0.24);
+                normal      (1 0 0);
+                interpolate true;
+            }
+        }
+    }
+}

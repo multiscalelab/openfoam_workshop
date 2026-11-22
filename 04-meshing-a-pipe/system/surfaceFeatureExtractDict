@@ -1,0 +1,23 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      surfaceFeatureExtractDict;
+}
+
+// Extract the sharp rims where the inlet and outlet meet the pipe wall.
+regionSTL.stl
+{
+    extractionMethod extractFromSurface;
+    extractFromSurfaceCoeffs
+    {
+        includedAngle 150;
+    }
+    subsetFeatures
+    {
+        nonManifoldEdges no;
+        openEdges        no;
+    }
+    writeObj no;
+}

@@ -1,0 +1,11 @@
+#!/bin/sh
+set -eu
+
+cd -- "$(dirname -- "$0")"
+
+surfaceCheck constant/triSurface/regionSTL.stl
+blockMesh
+surfaceFeatureExtract
+snappyHexMesh -overwrite
+checkMesh -constant -allTopology -allGeometry -meshQuality
+simpleFoam

@@ -1,0 +1,73 @@
+totalPressure
+{
+    type            pressure;
+    libs            (fieldFunctionObjects);
+    mode            total;
+    rho             rhoInf;
+    rhoInf          1000;
+    result          pTotal;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    writeTime;
+}
+
+totalPressureLoss
+{
+    type            multiFieldValue;
+    libs            (fieldFunctionObjects);
+    operation       subtract;
+    writeControl    timeStep;
+    writeInterval   1;
+    log             false;
+
+    functions
+    {
+        inlet
+        {
+            type            surfaceFieldValue;
+            regionType      patch;
+            name            inlet;
+            operation       weightedAverage;
+            weightField     phi;
+            fields          (pTotal);
+            writeFields     false;
+            log             false;
+        }
+
+        outlet
+        {
+            $inlet;
+            name            outlet;
+        }
+    }
+}
+
+staticPressureDrop
+{
+    type            multiFieldValue;
+    libs            (fieldFunctionObjects);
+    operation       subtract;
+    writeControl    timeStep;
+    writeInterval   1;
+    log             false;
+
+    functions
+    {
+        inlet
+        {
+            type            surfaceFieldValue;
+            regionType      patch;
+            name            inlet;
+            operation       areaAverage;
+            fields          (p);
+            writeFields     false;
+            log             false;
+        }
+
+        outlet
+        {
+            $inlet;
+            name            outlet;
+        }
+    }
+}

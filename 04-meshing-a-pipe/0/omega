@@ -1,0 +1,33 @@
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      omega;
+}
+
+dimensions      [0 0 -1 0 0 0 0];
+internalField   uniform 40;
+
+boundaryField
+{
+    inlet
+    {
+        type    fixedValue;
+        value   $internalField;
+    }
+
+    outlet
+    {
+        type        inletOutlet;
+        inletValue  $internalField;
+        value       $internalField;
+    }
+
+    wall
+    {
+        type        omegaWallFunction;
+        blending    binomial;
+        value       $internalField;
+    }
+}
