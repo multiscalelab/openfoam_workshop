@@ -1,0 +1,11 @@
+#!/bin/sh
+set -eu
+
+cd -- "$(dirname -- "$0")"
+
+blockMesh
+checkMesh
+mkdir -p 0
+cp 0.orig/U 0.orig/alpha.water 0.orig/p_rgh 0/
+setFields
+interFoam
